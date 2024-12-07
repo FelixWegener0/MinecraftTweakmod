@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.felixWegener.tweakmod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "JumpBoostEffectMixin",
+    "LivingEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

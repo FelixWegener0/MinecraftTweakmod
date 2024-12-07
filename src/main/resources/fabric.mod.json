@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "tweakmod",
+  "version": "${version}",
+  "name": "TweakMod",
+  "description": "Server side game tweaks",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/tweakmod/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "org.felixWegener.tweakmod.Tweakmod"
+    ]
+  },
+  "mixins": [
+    "tweakmod.mixins.json",
+    {
+      "config": "tweakmod.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
