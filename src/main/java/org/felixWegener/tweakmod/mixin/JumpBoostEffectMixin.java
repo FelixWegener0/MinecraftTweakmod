@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class JumpBoostEffectMixin  {
 
     @Inject(method = "onApplied", at = @At("HEAD"))
-    public void enableCreativeFlightWhenSlowFalling(LivingEntity entity, CallbackInfo ci) {
+    public void enableCreativeFlightWhenJumpBoost(LivingEntity entity, CallbackInfo ci) {
         if (entity instanceof ServerPlayerEntity player && player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
             player.getAbilities().allowFlying = true;
             player.sendAbilitiesUpdate();
