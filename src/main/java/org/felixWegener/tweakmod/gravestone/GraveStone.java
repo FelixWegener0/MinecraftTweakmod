@@ -7,6 +7,8 @@ import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
@@ -25,36 +27,56 @@ public class GraveStone {
     private static void storeInventoryInChest(ServerPlayerEntity player) {
         ServerWorld world = player.getServerWorld();
         BlockPos pos = player.getBlockPos();
+        BlockPos pos2 = player.getBlockPos().add(0, 1, 0);
 
         world.setBlockState(pos, Blocks.CHEST.getDefaultState());
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+        world.setBlockState(pos2, Blocks.CHEST.getDefaultState());
 
-        if (blockEntity instanceof ChestBlockEntity chest) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        BlockEntity blockEntity2 = world.getBlockEntity(pos2);
+
+        if (blockEntity instanceof ChestBlockEntity chest && blockEntity2 instanceof ChestBlockEntity chest2) {
             DefaultedList<ItemStack> mainInventory = player.getInventory().main;
             DefaultedList<ItemStack> armorInventory = player.getInventory().armor;
             DefaultedList<ItemStack> offHandInventory = player.getInventory().offHand;
 
+            int chestSize = chest.size();
             int slot = 0;
+            int slotChest2 = 0;
 
             for (ItemStack stack : mainInventory) {
-                if (!stack.isEmpty() && slot < chest.size()) {
-                    chest.setStack(slot++, stack);
+                if (!stack.isEmpty()) {
+                    if (slot < chestSize) {
+                        chest.setStack(slot++, stack);
+                    } else {
+                        chest2.setStack(slotChest2++, stack);
+                    }
                 }
             }
 
             for (ItemStack stack : armorInventory) {
-                if (!stack.isEmpty() && slot < chest.size()) {
-                    chest.setStack(slot++, stack);
+                if (!stack.isEmpty()) {
+                    if (slot < chestSize) {
+                        chest.setStack(slot++, stack);
+                    } else {
+                        chest2.setStack(slotChest2++, stack);
+                    }
                 }
             }
 
             for (ItemStack stack : offHandInventory) {
-                if (!stack.isEmpty() && slot < chest.size()) {
-                    chest.setStack(slot++, stack);
+                if (!stack.isEmpty()) {
+                    if (slot < chestSize) {
+                        chest.setStack(slot++, stack);
+                    } else {
+                        chest2.setStack(slotChest2, stack);
+                    }
                 }
             }
 
+            if (slot < chestSize) world.setBlockState(pos2, Blocks.AIR.getDefaultState());
             player.getInventory().clear();
+            player.sendMessage(Text.literal("Death position: " + pos.getX() + ' ' + pos.getY() + ' ' + pos.getZ()).formatted(Formatting.AQUA), false);
         }
     }
 
