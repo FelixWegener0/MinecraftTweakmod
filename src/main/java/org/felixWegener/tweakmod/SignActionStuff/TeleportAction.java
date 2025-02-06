@@ -1,4 +1,4 @@
-package org.felixWegener.tweakmod;
+package org.felixWegener.tweakmod.SignActionStuff;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -6,6 +6,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
+import org.felixWegener.tweakmod.Config.ReadConfig;
 
 public class TeleportAction {
 
@@ -14,12 +15,13 @@ public class TeleportAction {
         double y = Double.parseDouble(lines[2].getString());
         double z = Double.parseDouble(lines[3].getString());
         BlockPos targetBlock = new BlockPos((int) x, (int) y, (int) z);
-        int cost = 0;
         double distance = calculateDistanceXZ(targetBlock, player.getBlockPos());
+        int cost = 0;
+        int multi = ReadConfig.getTeleportRangeMulti();
 
-        if (distance > 100 && distance < 1000) cost = 5;
-        if (distance > 1000 && distance < 10000) cost = 10;
-        if (distance >= 10000) cost = 20;
+        if (distance > (100 * multi)) cost = 5;
+        if (distance > (1000 * multi)) cost = 10;
+        if (distance > (10000 * multi)) cost = 20;
 
         if (player.experienceLevel >= cost) {
 

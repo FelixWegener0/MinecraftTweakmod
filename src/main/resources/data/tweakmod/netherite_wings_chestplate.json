@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "EGA",
+    " N "
+  ],
+  "key": {
+    "N": { "item": "minecraft:netherite_chestplate" },
+    "E": { "item": "minecraft:elytra" },
+    "G": { "item": "minecraft:enchanted_golden_apple" }
+  },
+  "result": {
+    "item": "tweakmod:netherite_wings_chestplate",
+    "count": 1
+  }
+}

@@ -1,4 +1,4 @@
-package org.felixWegener.tweakmod;
+package org.felixWegener.tweakmod.SignActionStuff;
 
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.entity.BlockEntity;

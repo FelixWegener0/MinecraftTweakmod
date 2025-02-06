@@ -1,12 +1,14 @@
 package org.felixWegener.tweakmod;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.Identifier;
+import org.felixWegener.tweakmod.SignActionStuff.SignActions;
+import org.felixWegener.tweakmod.gravestone.GraveStone;
 
 public class Tweakmod implements ModInitializer {
 
     @Override
     public void onInitialize() {
         SignActions.register();
+        GraveStone.register();
     }
 }
