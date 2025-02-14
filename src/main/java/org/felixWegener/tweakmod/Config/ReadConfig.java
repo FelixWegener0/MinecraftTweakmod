@@ -12,12 +12,12 @@ import java.util.Scanner;
 
 public class ReadConfig {
 
-    private static final List<String> config = getConfigFile();
+    private static final List<String> config = getConfigFile("tweakModConfig.txt");
 
-    private static List<String> getConfigFile() {
+    public static List<String> getConfigFile(String configName) {
         List<String> config = new ArrayList<>();
 
-        Path path = FabricLoader.getInstance().getConfigDir().resolve("tweakModConfig.txt");
+        Path path = FabricLoader.getInstance().getConfigDir().resolve(configName);
 
         try {
             File configFile = new File(String.valueOf(path));
