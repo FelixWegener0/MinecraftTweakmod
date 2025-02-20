@@ -21,6 +21,7 @@ import net.minecraft.util.math.ChunkPos;
 public class HomePoint {
 
     public static void register() {
+        System.out.println("register homepoint mod");
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.register(CommandManager.literal("home").executes(context -> {
                 teleportPlayertoSpawn(context);

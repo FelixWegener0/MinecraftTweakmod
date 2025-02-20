@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 public class GraveStone {
 
     public static void register() {
+        System.out.println("register gravestone mod");
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) -> {
             if (entity instanceof ServerPlayerEntity player) {
                 storeInventoryInChest(player);

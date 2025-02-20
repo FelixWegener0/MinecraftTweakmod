@@ -17,7 +17,7 @@ import java.util.Objects;
 public class SignActions {
 
     public static void register() {
-        System.out.println("register");
+        System.out.println("register sign action mod");
         UseBlockCallback.EVENT.register(SignActions::onUseBlock);
     }
 
